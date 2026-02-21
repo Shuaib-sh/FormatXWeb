@@ -1,0 +1,82 @@
+.hero {
+  background-color: #f9fafb;
+  padding: 80px 20px 100px 20px;
+  text-align: center;
+}
+.hero h1 {
+  font-size: 52px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 20px 0;
+  line-height: 1.2;
+}
+
+.hero .highlight {
+  color: #4f46e5;
+}
+.hero .subtitle {
+  font-size: 18px;
+  color: #6b7280;
+  margin: 0 auto 40px auto;
+  max-width: 700px;
+  line-height: 1.6;
+}
+.search-container {
+  position: relative;
+  right: 50px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+}
+.search-icon svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 16px 14px 48px;
+  font-size: 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  background-color: white;
+}
+
+.search-input:focus {
+  border-color: #4f46e5;
+}
+
+.tools-section {
+  padding: 60px 48px;
+  background-color: white;
+}
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 32px 0;
+}
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto; /* center container */
+}
