@@ -1,71 +1,48 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ToolsService } from '../../core/services/tools.service';
+import { ToolGroup } from '../../models/tool.model';
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css']
 })
-export class LandingComponent {
-  dataFormatTools = [
-    {
-      title: 'HL7 Parser',
-      description: 'Parse HL7 v2 messages into structured JSON format.',
-      icon: '📄',
-      link: '#'
-    },
-    {
-      title: 'JSON Formatter',
-      description: 'Pretty print, minify, and validate JSON data.',
-      icon: '{ }',
-      link: '#'
-    }
-  ];
+export class LandingComponent implements OnInit {
+  toolGroups: ToolGroup[] = [];
+  isLoading: boolean = true;
 
-  fileTools = [
-    {
-      title: 'PDF → Image',
-      description: 'Convert PDF documents to image files.',
-      icon: '🖼️',
-      link: '#'
-    },
-    {
-      title: 'Image → PDF',
-      description: 'Convert images into PDF documents.',
-      icon: '📸',
-      link: '#'
-    },
-    {
-      title: 'Text → PDF',
-      description: 'Convert plain text into downloadable PDF files.',
-      icon: '📝',
-      link: '#'
-    }
-  ];
+  constructor(private toolsService: ToolsService) { }
 
-  cleaningTools = [
-    {
-      title: 'Remove Duplicates',
-      description: 'Remove duplicate lines from your text.',
-      icon: '📋',
-      link: '#'
-    },
-    {
-      title: 'Trim Spaces',
-      description: 'Remove extra whitespace and trim lines.',
-      icon: '✂️',
-      link: '#'
-    },
-    {
-      title: 'Normalize Lines',
-      description: 'Standardize line endings across platforms.',
-      icon: '📏',
-      link: '#'
-    },
-    {
-      title: 'Remove Special Chars',
-      description: 'Strip special characters from text content.',
-      icon: '🔤',
-      link: '#'
-    }
-  ];
+  ngOnInit(): void {
+    this.loadTools();
+  }
+
+  loadTools(): void {
+    this.toolsService.getAllTools().subscribe({
+      next: (response) => {
+        if (response.success) {
+          this.toolGroups = response.data;
+          this.isLoading = false;
+        }
+      },
+      error: (error) => {
+        console.error('Error loading tools:', error);
+        this.isLoading = false;
+      }
+    });
+  }
+
+  getIconEmoji(iconName: string): string {
+    const iconMap: { [key: string]: string } = {
+      'file-text': '📄',
+      'code': '{ }',
+      'image': '🖼️',
+      'file-image': '📸',
+      'copy': '📋',
+      'scissors': '✂️',
+      'align-left': '📏',
+      'type': '🔤'
+    };
+    return iconMap[iconName] || '📄';
+  }
 }
