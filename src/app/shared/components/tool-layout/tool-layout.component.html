@@ -1,0 +1,92 @@
+<app-navbar></app-navbar>
+
+<div class="tool-container">
+  <!-- Header Section -->
+  <div class="tool-header">
+    <a routerLink="/" class="back-link">
+      <span class="back-arrow">←</span> Back to Tools
+    </a>
+    
+    <div class="tool-info">
+      <div class="tool-icon-header">
+        <span class="icon-display">{{ toolIcon }}</span>
+      </div>
+      <div>
+        <h1 class="tool-title">{{ toolName }}</h1>
+        <p class="tool-description">{{ toolDescription }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input/Output Section -->
+  <div class="tool-content">
+    <!-- Input Section -->
+    <div class="input-section">
+      <div class="section-header">
+        <span class="section-title">Input</span>
+        <span class="text-size" *ngIf="inputText">{{ inputSize || 0 }} B</span>
+      </div>
+      <textarea 
+        class="input-textarea"
+        [(ngModel)]="inputText"
+        [placeholder]="inputPlaceholder"
+        [disabled]="isProcessing">
+      </textarea>
+    </div>
+
+    <!-- Output Section -->
+    <div class="output-section">
+      <div class="section-header">
+        <span class="section-title">Output</span>
+        <span class="text-size" *ngIf="hasProcessed">{{ outputSize }} B</span>
+      </div>
+      <textarea 
+        class="output-textarea"
+        [(ngModel)]="outputText"
+        [placeholder]="outputPlaceholder"
+        readonly>
+      </textarea>
+    </div>
+  </div>
+
+  <!-- Process Button -->
+  <div class="process-button-container">
+    <button 
+      class="process-button"
+      (click)="processInput()"
+      [disabled]="!inputText.trim() || isProcessing">
+      <span *ngIf="!isProcessing">Process</span>
+      <span *ngIf="isProcessing">Processing...</span>
+    </button>
+  </div>
+
+  <!-- Status Bar (shows after processing) -->
+  <div class="status-bar" *ngIf="hasProcessed">
+    <div class="status-left">
+      <span class="status-indicator" [class.success]="status === 'success'" [class.error]="status === 'error'">
+        <span *ngIf="status === 'success'">✓</span>
+        <span *ngIf="status === 'error'">✗</span>
+      </span>
+      <span class="status-text">{{ toolName }}</span>
+      <span class="status-time">⏱ {{ processingTime.toFixed(1) }} ms</span>
+      <span class="status-info">Input: {{ inputSize }} B</span>
+      <span class="status-info">Output: {{ outputSize }} B</span>
+    </div>
+  </div>
+
+  <!-- Action Buttons (shows after processing) -->
+  <div class="action-buttons" *ngIf="hasProcessed && status === 'success'">
+    <button class="action-btn" (click)="copyToClipboard()">
+      <span class="btn-icon">📋</span> Copy
+    </button>
+    <button class="action-btn" (click)="downloadOutput()">
+      <span class="btn-icon">⬇️</span> Download
+    </button>
+    <button class="action-btn" disabled>
+      <span class="btn-icon">✉️</span> Email
+    </button>
+    <button class="action-btn" disabled>
+      <span class="btn-icon">💾</span> Save
+    </button>
+  </div>
+</div>

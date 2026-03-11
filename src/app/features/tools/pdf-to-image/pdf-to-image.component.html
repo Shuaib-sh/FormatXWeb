@@ -1,0 +1,8 @@
+<app-file-tool-layout
+  [toolName]="toolName"
+  [toolDescription]="toolDescription"
+  [toolIcon]="toolIcon"
+  [acceptedFileTypes]="'.pdf'"
+  [outputType]="'image'"
+  (onProcess)="handleProcess($event)">
+</app-file-tool-layout>

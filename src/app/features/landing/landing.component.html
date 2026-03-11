@@ -27,9 +27,37 @@
   </div>
 </section>
 
-<!-- Loading State -->
-<div *ngIf="isLoading" class="loading-container">
-  <p>Loading tools...</p>
+<!-- Loading Skeleton State -->
+<div *ngIf="isLoading">
+  <!-- Data Format Tools Skeleton -->
+  <section class="tools-section">
+    <div class="section-container">
+      <div class="skeleton-section-title"></div>
+      <div class="tool-grid">
+        <app-skeleton-loader *ngFor="let item of [1,2]"></app-skeleton-loader>
+      </div>
+    </div>
+  </section>
+
+  <!-- File Tools Skeleton -->
+  <section class="tools-section">
+    <div class="section-container">
+      <div class="skeleton-section-title"></div>
+      <div class="tool-grid">
+        <app-skeleton-loader *ngFor="let item of [1,2,3]"></app-skeleton-loader>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cleaning Tools Skeleton -->
+  <section class="tools-section">
+    <div class="section-container">
+      <div class="skeleton-section-title"></div>
+      <div class="tool-grid">
+        <app-skeleton-loader *ngFor="let item of [1,2,3,4]"></app-skeleton-loader>
+      </div>
+    </div>
+  </section>
 </div>
 
 <!-- Dynamic Tool Groups from API -->

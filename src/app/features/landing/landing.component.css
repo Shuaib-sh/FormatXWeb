@@ -80,3 +80,22 @@
   width: 100%;
   margin: 0 auto; /* center container */
 }
+
+/* Skeleton section title */
+.skeleton-section-title {
+  width: 200px;
+  height: 24px;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+  margin-bottom: 32px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,8 @@
+<app-tool-layout
+  [toolName]="toolName"
+  [toolDescription]="toolDescription"
+  [toolIcon]="toolIcon"
+  [inputPlaceholder]="'Paste your HL7 message here...'"
+  [outputPlaceholder]="'Parsed JSON will appear here...'"
+  (onProcess)="handleProcess($event)">
+</app-tool-layout>

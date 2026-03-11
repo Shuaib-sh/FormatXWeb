@@ -1,0 +1,271 @@
+.tool-container {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header Section */
+.tool-header {
+  background-color: #f9fafb;
+  padding: 24px 48px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  color: #6b7280;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 20px;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: #111827;
+}
+
+.back-arrow {
+  margin-right: 6px;
+}
+
+.tool-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tool-icon-header {
+  width: 56px;
+  height: 56px;
+  background-color: #eef2ff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon-display {
+  font-size: 28px;
+}
+
+.tool-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 4px 0;
+}
+
+.tool-description {
+  font-size: 15px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Input/Output Content */
+.tool-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  background-color: white;
+  padding: 24px 48px;
+}
+
+.input-section,
+.output-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-section {
+  padding-right: 12px;
+}
+
+.output-section {
+  padding-left: 12px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.text-size {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.input-textarea,
+.output-textarea {
+  width: 100%;
+  min-height: 300px;
+  max-height: 500px;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-family: 'Courier New', Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  resize: vertical;
+  outline: none;
+  background-color: white;
+  color: #111827;
+}
+
+.input-textarea:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.output-textarea {
+  background-color: #fafafa;
+}
+
+/* Process Button */
+.process-button-container {
+  padding: 0 48px 24px 48px;
+  background-color: white;
+}
+
+.process-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.process-button:hover:not(:disabled) {
+  background-color: #4338ca;
+}
+
+.process-button:disabled {
+  background-color: #d1d5db;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Status Bar */
+.status-bar {
+  display: flex;
+  align-items: center;
+  padding: 12px 48px;
+  background-color: #f0fdf4;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.status-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.status-indicator.success {
+  background-color: #22c55e;
+  color: white;
+}
+
+.status-indicator.error {
+  background-color: #ef4444;
+  color: white;
+}
+
+.status-text {
+  font-weight: 600;
+  color: #111827;
+}
+
+.status-time,
+.status-info {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  padding: 24px 48px;
+  background-color: white;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background-color: white;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.action-btn:hover:not(:disabled) {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-icon {
+  font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .tool-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .input-section {
+    padding-right: 0;
+    margin-bottom: 24px;
+  }
+  
+  .output-section {
+    padding-left: 0;
+  }
+  
+  .tool-header,
+  .tool-content,
+  .process-button-container,
+  .status-bar,
+  .action-buttons {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}

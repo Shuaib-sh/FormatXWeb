@@ -1,0 +1,100 @@
+<app-navbar></app-navbar>
+
+<div class="tool-container">
+  <!-- Header -->
+  <div class="tool-header">
+    <a routerLink="/" class="back-link">
+      <span class="back-arrow">←</span> Back to Tools
+    </a>
+    
+    <div class="tool-info">
+      <div class="tool-icon-header">
+        <span class="icon-display">{{ toolIcon }}</span>
+      </div>
+      <div>
+        <h1 class="tool-title">{{ toolName }}</h1>
+        <p class="tool-description">{{ toolDescription }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- File Upload Section -->
+  <div class="upload-section">
+    <div 
+      class="dropzone"
+      [class.dragging]="isDragging"
+      [class.has-file]="selectedFile"
+      (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave($event)"
+      (drop)="onDrop($event)"
+      (click)="fileInput.click()">
+      
+      <input 
+        #fileInput
+        type="file"
+        [accept]="acceptedFileTypes"
+        (change)="onFileSelected($event)"
+        style="display: none;">
+      
+      <div *ngIf="!selectedFile" class="dropzone-content">
+        <div class="upload-icon">📁</div>
+        <p class="upload-text">Drag and drop your file here</p>
+        <p class="upload-subtext">or click to browse</p>
+      </div>
+      
+      <div *ngIf="selectedFile" class="file-info">
+        <div class="file-icon">📄</div>
+        <div class="file-details">
+          <p class="file-name">{{ selectedFile.name }}</p>
+          <p class="file-size">{{ (selectedFile.size / 1024).toFixed(2) }} KB</p>
+        </div>
+        <button class="remove-file" (click)="clearFile(); $event.stopPropagation()">×</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Process Button -->
+  <div class="process-button-container">
+    <button 
+      class="process-button"
+      (click)="processFile()"
+      [disabled]="!selectedFile || isProcessing">
+      <span *ngIf="!isProcessing">Process</span>
+      <span *ngIf="isProcessing">Processing...</span>
+    </button>
+  </div>
+
+  <!-- Output Section - Images -->
+  <div class="output-section" *ngIf="hasProcessed && outputType === 'image' && outputImages.length > 0">
+    <div class="output-header">
+      <h3>Output Images ({{ outputImages.length }})</h3>
+      <button class="download-all-btn" (click)="downloadAllImages()">
+        Download All
+      </button>
+    </div>
+    
+    <div class="image-grid">
+      <div *ngFor="let image of outputImages; let i = index" class="image-card">
+        <img [src]="image" [alt]="'Page ' + (i + 1)">
+        <div class="image-footer">
+          <span>Page {{ i + 1 }}</span>
+          <button class="download-btn" (click)="downloadImage(image, i)">Download</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar" *ngIf="hasProcessed">
+    <div class="status-left">
+      <span class="status-indicator" [class.success]="status === 'success'" [class.error]="status === 'error'">
+        <span *ngIf="status === 'success'">✓</span>
+        <span *ngIf="status === 'error'">✗</span>
+      </span>
+      <span class="status-text">{{ toolName }}</span>
+      <span class="status-time">⏱ {{ processingTime.toFixed(1) }} ms</span>
+      <span class="status-info">Input: {{ (inputSize / 1024).toFixed(2) }} KB</span>
+      <span class="status-info" *ngIf="outputType === 'image'">Pages: {{ outputSize }}</span>
+    </div>
+  </div>
+</div>
