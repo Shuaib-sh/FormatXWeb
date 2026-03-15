@@ -18,6 +18,8 @@ import { TextToPdfComponent } from './features/tools/text-to-pdf/text-to-pdf.com
 import { ToastComponent } from './shared/components/toast/toast.component';
 import { PdfToImageComponent } from './features/tools/pdf-to-image/pdf-to-image.component';
 import { FileToolLayoutComponent } from './shared/components/file-tool-layout/file-tool-layout.component';
+import { ImageToPdfComponent } from './features/tools/image-to-pdf/image-to-pdf.component';
+import { MultiFileToolLayoutComponent } from './shared/components/multi-file-tool-layout/multi-file-tool-layout.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { FileToolLayoutComponent } from './shared/components/file-tool-layout/fi
     TextToPdfComponent,
     ToastComponent,
     PdfToImageComponent,
-    FileToolLayoutComponent
+    FileToolLayoutComponent,
+    ImageToPdfComponent,
+    MultiFileToolLayoutComponent
   ],
   imports: [
     BrowserModule,

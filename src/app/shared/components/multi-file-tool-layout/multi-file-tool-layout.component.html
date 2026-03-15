@@ -1,0 +1,92 @@
+<app-navbar></app-navbar>
+
+<div class="tool-container">
+  <!-- Header -->
+  <div class="tool-header">
+    <a routerLink="/" class="back-link">
+      <span class="back-arrow">←</span> Back to Tools
+    </a>
+    
+    <div class="tool-info">
+      <div class="tool-icon-header">
+        <span class="icon-display">{{ toolIcon }}</span>
+      </div>
+      <div>
+        <h1 class="tool-title">{{ toolName }}</h1>
+        <p class="tool-description">{{ toolDescription }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- File Upload Section -->
+  <div class="upload-section">
+    <div 
+      class="dropzone"
+      [class.dragging]="isDragging"
+      [class.has-files]="selectedFiles.length > 0"
+      (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave($event)"
+      (drop)="onDrop($event)"
+      (click)="fileInput.click()">
+      
+      <input 
+        #fileInput
+        type="file"
+        [accept]="acceptedFileTypes"
+        multiple
+        (change)="onFileSelected($event)"
+        style="display: none;">
+      
+      <div class="dropzone-content">
+        <div class="upload-icon">📁</div>
+        <p class="upload-text">Drag and drop your images here</p>
+        <p class="upload-subtext">or click to browse (max {{ maxFiles }} files)</p>
+        <p class="file-count" *ngIf="selectedFiles.length > 0">
+          {{ selectedFiles.length }} file(s) selected
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Selected Files Preview -->
+  <div class="files-preview" *ngIf="selectedFiles.length > 0">
+    <div class="preview-header">
+      <h3>Selected Images ({{ selectedFiles.length }})</h3>
+      <button class="clear-all-btn" (click)="clearAllFiles()">Clear All</button>
+    </div>
+    
+    <div class="preview-grid">
+      <div *ngFor="let file of selectedFiles; let i = index" class="preview-item">
+        <img [src]="previewUrls[i]" [alt]="file.name" class="preview-image">
+        <div class="preview-info">
+          <p class="preview-name">{{ file.name }}</p>
+          <p class="preview-size">{{ (file.size / 1024).toFixed(2) }} KB</p>
+        </div>
+        <button class="remove-btn" (click)="removeFile(i); $event.stopPropagation()">×</button>
+        <div class="preview-order">{{ i + 1 }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="process-button-container" *ngIf="selectedFiles.length > 0">
+    <button 
+      class="process-button"
+      (click)="processFiles()"
+      [disabled]="isProcessing || selectedFiles.length === 0">
+      <span *ngIf="!isProcessing">Convert to PDF</span>
+      <span *ngIf="isProcessing">Converting...</span>
+    </button>
+  </div>
+
+  <div class="status-bar" *ngIf="hasProcessed">
+    <div class="status-left">
+      <span class="status-indicator" [class.success]="status === 'success'" [class.error]="status === 'error'">
+        <span *ngIf="status === 'success'">✓</span>
+        <span *ngIf="status === 'error'">✗</span>
+      </span>
+      <span class="status-text">{{ toolName }}</span>
+      <span class="status-time">⏱ {{ processingTime.toFixed(1) }} ms</span>
+      <span class="status-info">Images: {{ selectedFiles.length }}</span>
+    </div>
+  </div>
+</div>

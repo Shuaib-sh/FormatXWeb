@@ -1,0 +1,8 @@
+<app-multi-file-tool-layout
+  [toolName]="toolName"
+  [toolDescription]="toolDescription"
+  [toolIcon]="toolIcon"
+  [acceptedFileTypes]="'image/*,.jpg,.jpeg,.png,.gif,.bmp,.webp'"
+  [maxFiles]="20"
+  (onProcess)="handleProcess($event)">
+</app-multi-file-tool-layout>

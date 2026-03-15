@@ -5,6 +5,7 @@ import { Hl7ParserComponent } from './features/tools/hl7-parser/hl7-parser.compo
 import { JsonFormatterComponent } from './features/tools/json-formatter/json-formatter.component';
 import { TextToPdfComponent } from './features/tools/text-to-pdf/text-to-pdf.component';
 import { PdfToImageComponent } from './features/tools/pdf-to-image/pdf-to-image.component';
+import { ImageToPdfComponent } from './features/tools/image-to-pdf/image-to-pdf.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'tools/json-formatter', component: JsonFormatterComponent },
   { path: 'tools/text-to-pdf', component: TextToPdfComponent },
   { path: 'tools/pdf-to-image', component: PdfToImageComponent },
+  { path: 'tools/image-to-pdf', component: ImageToPdfComponent }
 ];
 
 @NgModule({

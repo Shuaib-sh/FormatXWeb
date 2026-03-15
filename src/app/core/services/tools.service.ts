@@ -30,4 +30,17 @@ export class ToolsService {
   
   return this.http.post<ApiResponse<string[]>>(`${this.apiUrl}/tools/pdf-to-image`, formData);
   }
+  // Add this method
+  imageToPDF(files: File[]): Observable<Blob> {
+  const formData = new FormData();
+  
+  // Append all files
+  files.forEach((file, index) => {
+    formData.append('files', file);
+  });
+  
+  return this.http.post(`${this.apiUrl}/tools/image-to-pdf`, formData, {
+    responseType: 'blob'  // Expecting PDF file back
+  });
+  }
 }
