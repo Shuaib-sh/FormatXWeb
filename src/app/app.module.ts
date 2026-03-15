@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +22,8 @@ import { PdfToImageComponent } from './features/tools/pdf-to-image/pdf-to-image.
 import { FileToolLayoutComponent } from './shared/components/file-tool-layout/file-tool-layout.component';
 import { ImageToPdfComponent } from './features/tools/image-to-pdf/image-to-pdf.component';
 import { MultiFileToolLayoutComponent } from './shared/components/multi-file-tool-layout/multi-file-tool-layout.component';
+import { AuthModalComponent } from './shared/components/auth-modal/auth-modal.component';
+import { ClickOutsideDirective } from './shared/directives/click-outside.directive';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,9 @@ import { MultiFileToolLayoutComponent } from './shared/components/multi-file-too
     PdfToImageComponent,
     FileToolLayoutComponent,
     ImageToPdfComponent,
-    MultiFileToolLayoutComponent
+    MultiFileToolLayoutComponent,
+    AuthModalComponent,
+    ClickOutsideDirective
   ],
   imports: [
     BrowserModule,
@@ -46,7 +52,13 @@ import { MultiFileToolLayoutComponent } from './shared/components/multi-file-too
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

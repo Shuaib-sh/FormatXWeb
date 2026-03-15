@@ -1,0 +1,143 @@
+<div class="modal-backdrop" *ngIf="isOpen" (click)="onBackdropClick($event)">
+  <div class="modal-container">
+    <!-- Close Button -->
+    <button class="close-btn" (click)="closeModal()">×</button>
+    
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <div class="modal-logo">
+        <svg 
+          class="lightning-icon"
+          xmlns="http://www.w3.org/2000/svg" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          stroke-width="2" 
+          stroke-linecap="round" 
+          stroke-linejoin="round">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+        </svg>
+        <span class="brand-text">
+          Format<span class="highlight">X</span>
+        </span>
+      </div>
+      
+      <h2 class="modal-title">Welcome</h2>
+      <p class="modal-subtitle">Sign in to your account or create a new one</p>
+    </div>
+
+    <!-- Google Sign In Button -->
+    <button class="google-btn" (click)="onGoogleSignIn()">
+      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" class="google-icon">
+      Continue with Google
+    </button>
+
+    <div class="divider">
+      <span>or continue with email</span>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button 
+        class="tab-btn"
+        [class.active]="activeTab === 'signin'"
+        (click)="switchTab('signin')">
+        Sign in
+      </button>
+      <button 
+        class="tab-btn"
+        [class.active]="activeTab === 'register'"
+        (click)="switchTab('register')">
+        Register
+      </button>
+    </div>
+
+    <!-- Sign In Form -->
+    <form *ngIf="activeTab === 'signin'" class="auth-form" (ngSubmit)="onSignIn()">
+      <div class="form-group">
+        <label for="loginEmail">Email</label>
+        <input 
+          id="loginEmail"
+          type="email" 
+          [(ngModel)]="loginEmail"
+          name="loginEmail"
+          placeholder="you@example.com"
+          [disabled]="isLoading"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="loginPassword">Password</label>
+        <input 
+          id="loginPassword"
+          type="password" 
+          [(ngModel)]="loginPassword"
+          name="loginPassword"
+          placeholder="••••••••"
+          [disabled]="isLoading"
+          required>
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="isLoading">
+        <span *ngIf="!isLoading">Sign in</span>
+        <span *ngIf="isLoading">Signing in...</span>
+      </button>
+    </form>
+
+    <!-- Register Form -->
+    <form *ngIf="activeTab === 'register'" class="auth-form" (ngSubmit)="onRegister()">
+      <div class="form-group">
+        <label for="registerName">Name</label>
+        <input 
+          id="registerName"
+          type="text" 
+          [(ngModel)]="registerName"
+          name="registerName"
+          placeholder="Your name"
+          [disabled]="isLoading"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="registerEmail">Email</label>
+        <input 
+          id="registerEmail"
+          type="email" 
+          [(ngModel)]="registerEmail"
+          name="registerEmail"
+          placeholder="you@example.com"
+          [disabled]="isLoading"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="registerPassword">Password</label>
+        <input 
+          id="registerPassword"
+          type="password" 
+          [(ngModel)]="registerPassword"
+          name="registerPassword"
+          placeholder="••••••••"
+          [disabled]="isLoading"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="registerConfirmPassword">Confirm Password</label>
+        <input 
+          id="registerConfirmPassword"
+          type="password" 
+          [(ngModel)]="registerConfirmPassword"
+          name="registerConfirmPassword"
+          placeholder="••••••••"
+          [disabled]="isLoading"
+          required>
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="isLoading">
+        <span *ngIf="!isLoading">Create account</span>
+        <span *ngIf="isLoading">Creating account...</span>
+      </button>
+    </form>
+  </div>
+</div>

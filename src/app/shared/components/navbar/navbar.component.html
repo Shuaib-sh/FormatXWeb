@@ -32,9 +32,43 @@
   </div>
 
   <div class="nav-right">
-    <div class="nav-item">
-      <button class="btn-login">Log in</button>
-      <button class="btn-register">Register</button>
+  <!-- Show Sign In button when NOT logged in -->
+  <button class="btn-signin" *ngIf="!currentUser" (click)="openAuthModal()">
+    Sign In
+  </button>
+
+  <!-- Show User Profile when logged in -->
+  <div class="user-menu" *ngIf="currentUser" (clickOutside)="closeDropdown()">
+    <button class="user-avatar" (click)="toggleDropdown()">
+      {{ getUserInitial() }}
+    </button>
+
+    <!-- Dropdown Menu -->
+    <div class="dropdown-menu" *ngIf="isDropdownOpen">
+      <div class="dropdown-header">
+        <p class="user-name">{{ currentUser.username }}</p>
+        <p class="user-email">{{ currentUser.email }}</p>
+      </div>
+      
+      <div class="dropdown-divider"></div>
+      
+      <a routerLink="/dashboard" class="dropdown-item" (click)="closeDropdown()">
+        <span class="dropdown-icon">📊</span>
+        Dashboard
+      </a>
+      
+      <a routerLink="/profile" class="dropdown-item" (click)="closeDropdown()">
+        <span class="dropdown-icon">👤</span>
+        Profile
+      </a>
+      
+      <div class="dropdown-divider"></div>
+      
+      <button class="dropdown-item logout" (click)="logout()">
+        <span class="dropdown-icon">🚪</span>
+        Log out
+      </button>
     </div>
   </div>
+</div>
 </nav>
