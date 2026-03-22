@@ -50,13 +50,13 @@ import { ClickOutsideDirective } from './shared/directives/click-outside.directi
     BrowserAnimationsModule, 
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
     }
   ],
   bootstrap: [AppComponent]

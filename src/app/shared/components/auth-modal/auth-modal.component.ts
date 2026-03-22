@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
 import { ToastService } from '../../../core/services/toast.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-auth-modal',
@@ -12,18 +13,15 @@ export class AuthModalComponent implements OnInit, OnDestroy {
   isOpen = false;
   activeTab: 'signin' | 'register' = 'signin';
   
-  // Sign In Form
   loginEmail = '';
   loginPassword = '';
   
-  // Register Form
   registerName = '';
   registerEmail = '';
   registerPassword = '';
   registerConfirmPassword = '';
   
   isLoading = false;
-  
   private subscription?: Subscription;
 
   constructor(
@@ -35,7 +33,6 @@ export class AuthModalComponent implements OnInit, OnDestroy {
     this.subscription = this.authService.authModalOpen$.subscribe(isOpen => {
       this.isOpen = isOpen;
       if (isOpen) {
-        // Reset form when modal opens
         this.resetForms();
         this.activeTab = 'signin';
       }
@@ -65,7 +62,6 @@ export class AuthModalComponent implements OnInit, OnDestroy {
   }
 
   onSignIn(): void {
-    // Validation
     if (!this.loginEmail || !this.loginPassword) {
       this.toastService.warning('Please fill in all fields');
       return;
@@ -88,14 +84,13 @@ export class AuthModalComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         this.isLoading = false;
-        const errorMsg = error.error?.message || 'Login failed. Please try again.';
+        const errorMsg = error.error?.message || 'Login failed';
         this.toastService.error(errorMsg);
       }
     });
   }
 
   onRegister(): void {
-    // Validation
     if (!this.registerName || !this.registerEmail || !this.registerPassword || !this.registerConfirmPassword) {
       this.toastService.warning('Please fill in all fields');
       return;
@@ -130,18 +125,41 @@ export class AuthModalComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         this.isLoading = false;
-        const errorMsg = error.error?.message || 'Registration failed. Please try again.';
+        const errorMsg = error.error?.message || 'Registration failed';
         this.toastService.error(errorMsg);
       }
     });
   }
 
   onGoogleSignIn(): void {
-    // Placeholder for Google OAuth
-    this.toastService.info('Google Sign In coming soon!');
+    this.isLoading = true;
+
+    this.authService.signInWithGoogle().subscribe({
+      next: (credential) => {
+        this.authService.googleLogin(credential).subscribe({
+          next: (response) => {
+            this.isLoading = false;
+            if (response.success) {
+              this.toastService.success('Google login successful!');
+              this.closeModal();
+            } else {
+              this.toastService.error(response.message || 'Google login failed');
+            }
+          },
+          error: (error) => {
+            this.isLoading = false;
+            const errorMsg = error.error?.message || 'Google login failed';
+            this.toastService.error(errorMsg);
+          }
+        });
+      },
+      error: (error) => {
+        this.isLoading = false;
+        this.toastService.warning('Please allow popups and try again');
+      }
+    });
   }
 
-  // Close modal when clicking outside
   onBackdropClick(event: MouseEvent): void {
     if (event.target === event.currentTarget) {
       this.closeModal();
