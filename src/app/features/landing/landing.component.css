@@ -3,6 +3,7 @@
   padding: 80px 20px 100px 20px;
   text-align: center;
 }
+
 .hero h1 {
   font-size: 52px;
   font-weight: 700;
@@ -14,6 +15,7 @@
 .hero .highlight {
   color: #4f46e5;
 }
+
 .hero .subtitle {
   font-size: 18px;
   color: #6b7280;
@@ -21,11 +23,13 @@
   max-width: 700px;
   line-height: 1.6;
 }
+
+/* ✅ Fixed search bar - removed right:50px */
 .search-container {
   position: relative;
-  right: 50px;
   max-width: 500px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .search-icon {
@@ -34,7 +38,10 @@
   top: 50%;
   transform: translateY(-50%);
   color: #9ca3af;
+  pointer-events: none;
+  z-index: 1;
 }
+
 .search-icon svg {
   width: 18px;
   height: 18px;
@@ -49,6 +56,7 @@
   border-radius: 8px;
   outline: none;
   background-color: white;
+  box-sizing: border-box; /* ✅ prevents overflow */
 }
 
 .search-input:focus {
@@ -59,10 +67,13 @@
   padding: 60px 48px;
   background-color: white;
 }
+
 .section-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  box-sizing: border-box; /* ✅ key fix */
+  width: 100%;
 }
 
 .section-title {
@@ -72,16 +83,15 @@
   margin: 0 0 32px 0;
 }
 
+/* ✅ Desktop grid - looks exactly like your laptop screenshot */
 .tool-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 24px;
-  max-width: 1200px;
   width: 100%;
-  margin: 0 auto; /* center container */
+  box-sizing: border-box;
 }
 
-/* Skeleton section title */
 .skeleton-section-title {
   width: 200px;
   height: 24px;
@@ -92,10 +102,46 @@
 }
 
 @keyframes pulse {
-  0%, 100% {
-    opacity: 1;
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ===== TABLET (768px - 1024px) ===== */
+@media (max-width: 1024px) {
+  .hero h1 { font-size: 40px; }
+
+  .tools-section { padding: 40px 24px; }
+
+  .tool-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  50% {
-    opacity: 0.5;
+}
+
+/* ===== MOBILE (max 640px) ===== */
+@media (max-width: 640px) {
+  .hero {
+    padding: 40px 16px 50px 16px;
+  }
+
+  .hero h1 { font-size: 28px; }
+
+  .hero .subtitle { font-size: 14px; }
+
+  .search-container {
+    max-width: 100%;
+  }
+
+  .tools-section {
+    padding: 28px 12px;
+  }
+
+  .section-container {
+    padding: 0;
+  }
+
+  /* ✅ Single column - cards stack cleanly, no overlap */
+  .tool-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }

@@ -66,3 +66,11 @@
 .tool-link:hover .arrow {
   transform: translateX(4px);
 }
+
+.tool-card {
+  /* add this line to existing styles */
+  box-sizing: border-box;
+  min-width: 0; /* ✅ critical - prevents grid blowout */
+  
+  /* rest stays the same... */
+}

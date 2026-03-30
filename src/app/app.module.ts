@@ -24,6 +24,7 @@ import { ImageToPdfComponent } from './features/tools/image-to-pdf/image-to-pdf.
 import { MultiFileToolLayoutComponent } from './shared/components/multi-file-tool-layout/multi-file-tool-layout.component';
 import { AuthModalComponent } from './shared/components/auth-modal/auth-modal.component';
 import { ClickOutsideDirective } from './shared/directives/click-outside.directive';
+import { SpotlightSearchComponent } from './shared/components/spotlight-search/spotlight-search.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ClickOutsideDirective } from './shared/directives/click-outside.directi
     ImageToPdfComponent,
     MultiFileToolLayoutComponent,
     AuthModalComponent,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    SpotlightSearchComponent
   ],
   imports: [
     BrowserModule,

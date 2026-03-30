@@ -178,3 +178,40 @@ nav{
 .dropdown-icon {
   font-size: 16px;
 }
+
+/* ===== RESPONSIVE FIXES ===== */
+@media (max-width: 768px) {
+  nav {
+    padding: 12px 16px;
+    flex-wrap: nowrap;
+  }
+
+  .nav-center {
+    gap: 16px;
+  }
+
+  .nav-center .nav-link {
+    font-size: 11px;
+  }
+
+  .btn-signin {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .brand-text {
+    font-size: 16px;
+  }
+
+  .lightning-icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 400px) {
+  /* Hide nav links on very small screens to prevent overflow */
+  .nav-center {
+    display: none;
+  }
+}
