@@ -322,3 +322,41 @@
     justify-content: center;
   }
 }
+
+.email-btn-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.email-btn-wrapper[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e293b;
+  color: #fff;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.email-btn-wrapper[title]:hover::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #1e293b;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.action-btn--disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

@@ -1,4 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { EmailService } from 'src/app/core/services/email.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 
 @Component({
   selector: 'app-tool-layout',
@@ -23,7 +26,38 @@ export class ToolLayoutComponent {
   outputSize: number = 0;
   status: 'success' | 'error' | null = null;
   errorMessage: string = '';
+  isEmailModalOpen = false;
+  currentUser: any = null;
 
+  constructor(private authService: AuthService, private emailService: EmailService, private toastService: ToastService) {}
+  ngOnInit() {
+  this.authService.currentUser$.subscribe(user => {
+    this.currentUser = user;
+  });
+  }
+
+  openEmailModal() {
+  if (this.currentUser) {
+    this.isEmailModalOpen = true;
+  }
+}
+
+closeEmailModal() {
+  this.isEmailModalOpen = false;
+}
+
+onSendEmail(payload: any) {
+  this.emailService.sendEmail(payload).subscribe({
+    next: () => {
+      this.closeEmailModal();
+      this.toastService.show('Email sent successfully!', 'success');
+    },
+    error: (err) => {
+      console.error('Email send failed:', err);
+      this.toastService.show('Failed to send email', 'error');
+    }
+  });
+}
   processInput(): void {
     if (!this.inputText.trim()) {
       return;

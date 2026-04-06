@@ -1,0 +1,329 @@
+/* Overlay */
+.email-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: overlay-in 0.2s ease;
+}
+
+@keyframes overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Modal box */
+.email-modal {
+  width: 100%;
+  max-width: 540px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.18);
+  overflow: hidden;
+  animation: modal-in 0.22s ease;
+}
+
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Header */
+.email-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+}
+
+.email-modal-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.email-modal-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.email-modal-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.email-modal-subtitle {
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  margin: 2px 0 0;
+}
+
+.email-modal-subtitle strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.email-modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+.email-modal-close:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* Body */
+.email-modal-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Fields */
+.email-field {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.email-label {
+  min-width: 56px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  padding-top: 10px;
+}
+
+.email-input-readonly {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  border-radius: 10px;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 14px;
+}
+
+.email-input-readonly svg {
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.email-input {
+  flex: 1;
+  padding: 9px 14px;
+  border-radius: 10px;
+  border: 1.5px solid #e2e8f0;
+  font-size: 14px;
+  color: #1e293b;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  background: #fff;
+}
+
+.email-input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.email-input--error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08) !important;
+}
+
+.email-field-error {
+  font-size: 11.5px;
+  color: #ef4444;
+  margin-top: 4px;
+  display: block;
+  padding-left: 72px;
+  width: 100%;
+}
+
+/* Message textarea */
+.email-message {
+  width: 100%;
+  min-height: 90px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid #e2e8f0;
+  font-size: 14px;
+  color: #1e293b;
+  resize: vertical;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  box-sizing: border-box;
+}
+.email-message:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+.email-message::placeholder {
+  color: #94a3b8;
+}
+
+/* Output card */
+.email-output-card {
+  border-radius: 12px;
+  border: 1.5px solid #e2e8f0;
+  background: #f8fafc;
+  overflow: hidden;
+}
+
+.email-output-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+}
+
+.email-output-card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #ede9fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6366f1;
+  flex-shrink: 0;
+}
+
+.email-output-card-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.email-output-card-meta {
+  font-size: 12px;
+  color: #94a3b8;
+  margin: 2px 0 0;
+}
+
+.email-output-included {
+  color: #6366f1;
+  font-weight: 600;
+}
+
+.email-output-preview {
+  margin: 0;
+  padding: 10px 14px 14px;
+  font-size: 12px;
+  color: #475569;
+  font-family: 'Courier New', monospace;
+  background: #f1f5f9;
+  border-top: 1px solid #e2e8f0;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 110px;
+  overflow: hidden;
+  line-height: 1.6;
+}
+
+/* Footer */
+.email-modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.email-footer-hint {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.email-footer-hint--error {
+  color: #ef4444;
+}
+
+.email-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.email-btn-cancel {
+  padding: 9px 18px;
+  border-radius: 10px;
+  border: 1.5px solid #e2e8f0;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.email-btn-cancel:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.email-btn-send {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.email-btn-send:hover:not(:disabled) {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+.email-btn-send:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.email-btn-send span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* Spinner */
+.spin {
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}

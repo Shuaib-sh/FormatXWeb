@@ -25,6 +25,7 @@ import { MultiFileToolLayoutComponent } from './shared/components/multi-file-too
 import { AuthModalComponent } from './shared/components/auth-modal/auth-modal.component';
 import { ClickOutsideDirective } from './shared/directives/click-outside.directive';
 import { SpotlightSearchComponent } from './shared/components/spotlight-search/spotlight-search.component';
+import { EmailShareModalComponent } from './features/email/email-share-modal/email-share-modal.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { SpotlightSearchComponent } from './shared/components/spotlight-search/s
     MultiFileToolLayoutComponent,
     AuthModalComponent,
     ClickOutsideDirective,
-    SpotlightSearchComponent
+    SpotlightSearchComponent,
+    EmailShareModalComponent
   ],
   imports: [
     BrowserModule,

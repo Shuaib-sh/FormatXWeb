@@ -82,11 +82,30 @@
     <button class="action-btn" (click)="downloadOutput()">
       <span class="btn-icon">⬇️</span> Download
     </button>
-    <button class="action-btn" disabled>
-      <span class="btn-icon">✉️</span> Email
-    </button>
+
+    <!-- Email Button with tooltip for non-logged-in users -->
+    <div class="email-btn-wrapper" [title]="!currentUser ? 'Login to use this feature' : ''">
+      <button 
+        class="action-btn"
+        [disabled]="!currentUser"
+        [class.action-btn--disabled]="!currentUser"
+        (click)="openEmailModal()">
+        <span class="btn-icon">✉️</span> Email
+      </button>
+    </div>
+
     <button class="action-btn" disabled>
       <span class="btn-icon">💾</span> Save
     </button>
   </div>
+
 </div>
+
+<!-- Email Share Modal -->
+<app-email-share-modal
+  *ngIf="isEmailModalOpen"
+  [data]="{ toolName: toolName, outputContent: outputText }"
+  [fromEmail]="currentUser?.email"
+  (closed)="closeEmailModal()"
+  (sendEmail)="onSendEmail($event)">
+</app-email-share-modal>
